@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div id="newsContent"></div>
+    <div class="countries"></div>
+    <script>
+      var selectedCountry = "";
+
+      selectedCountry = localStorage.getItem("selectedCountries").split(",");
+      console.log(selectedCountry);
+
+      for (let i = 0; i < selectedCountry.length; i++) {
+        let response = getCountries(selectedCountry[i]);
+      }
+
+      function getCountries(selectedCountry) {
+        const url = `https://restcountries.com/v2/name/${selectedCountry}`;
+        return axios.get(url).then((res) => {
+          document.querySelector("#newsContent").innerHTML += `
+          <div class="country1" >
+            <div class="country2">
+            <div class="class="country-img">
+            <img src="${res.data[0].flag}" class="country-img1"alt="image" />
+            </div>
+               <div class="country-info">
+                     <h5>name:${res.data[0].name} </h5><br>
+            <p>Capital: ${res.data[0].capital}</p>
+            <p>Population: ${res.data[0].population}</p>
+            <p>NumericCode: ${res.data[0].numericCode}</p>
+            <p>Region: ${res.data[0].region}</p>
+            <p>SubRegion: ${res.data[0].subregion}</p>
+            <p>Languages: ${res.data[0].languages[0].name}</p>
+            <p>Currencies: ${res.data[0].currencies[0].name}</p>
+</div>
+         </div>
+          
+      </div></div>
+       
+
+        `;
+          console.log(res);
+          return res.data;
+        });
+      }
+    </script>
+  </body>
+</html>
