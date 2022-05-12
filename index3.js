@@ -74,20 +74,7 @@ dropDown.addEventListener("click", () => {
 });
 const regionName = document.getElementsByClassName("regionName");
 const countryName = document.getElementsByClassName("countryName");
-region.forEach((element) => {
-  element.addEventListener("click", () => {
-    Array.from(regionName).forEach((elem) => {
-      if (
-        elem.innerText.includes(element.innerText) ||
-        element.innerText == "All"
-      ) {
-        elem.parentElement.parentElement.style.display = "grid";
-      } else {
-        elem.parentElement.parentElement.style.display = "none";
-      }
-    });
-  });
-});
+
 
 search.addEventListener("input", () => {
   Array.from(countryName).forEach((elem) => {
